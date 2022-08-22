@@ -1,0 +1,60 @@
+package selenium_training;
+
+import java.text.NumberFormat;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class Actions  {
+	public static void main(String[] args) throws InterruptedException{
+	//Setting system properties of ChromeDriver
+	System.setProperty("webdriver.chrome.driver", "C:\\Users\\steenac//chromedriver.exe");	
+	WebDriver driver = new ChromeDriver();
+	driver.manage().window().maximize();
+	Thread.sleep(200);
+	
+	/*Actions acc = new Actions();
+    WebElement txtUsername = driver.findElement(By.name("q"));
+    org.openqa.selenium.interactions.Action seriesOfActions = acc
+          .moveToElement(txtUsername)
+          .click()
+          .keyDown(txtUsername, Keys.SHIFT)
+          .sendKeys(txtUsername, "BTS JUNGKOOK")
+          .keyUp(txtUsername, Keys.SHIFT)
+          .doubleClick(txtUsername)
+          .contextClick()
+          .build();
+          
+      seriesOfActions.perform() ;
+}
+}*/
+
+driver.get("http://demo.guru99.com/test/web-table-element.php");
+String max;
+double m=0,r=0;
+
+  //No. of Columns
+   List  col = driver.findElements(By.xpath(".//*[@id='leftcontainer']/table/thead/tr/th"));
+   System.out.println("Total No of columns are : " +col.size());
+   //No.of rows
+   List  rows = driver.findElements(By.xpath (".//*[@id='leftcontainer']/table/tbody/tr/td[1]"));
+   System.out.println("Total No of rows are : " + rows.size());
+   for (int i =1;i<rows.size();i++)
+   {    
+       min= driver.findElement(By.xpath("//*[@id='leftcontainer']/table/tbody/tr["+(i+1)+"]/td[4]")).getText();
+       NumberFormat f =NumberFormat.getNumberInstance();
+       Number num = f.parse(min);
+       min = num.toString();
+       m = Double.parseDouble(min);
+       if(m<r)
+        {    
+           r=m;
+        }
+   }
+   System.out.println("Minimum current price is : "+ r);
+}
+}

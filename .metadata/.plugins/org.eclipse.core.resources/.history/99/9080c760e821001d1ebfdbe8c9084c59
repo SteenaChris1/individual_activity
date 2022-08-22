@@ -1,0 +1,5 @@
+package selenium_training;
+
+public @interface Given {
+
+}
